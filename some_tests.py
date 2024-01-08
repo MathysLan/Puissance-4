@@ -23,8 +23,12 @@ for _ in range(20):
  placerPionPlateau(p, construirePion(1),
  randint(0, const.NB_COLUMNS - 1))
 print(toStringPlateau(p))
-print(detecter4horizontalPlateau(p,1))
-print(detecter4verticalPlateau(p,1))
-print(detecter4diagonaleDirectePlateau(p,1))
-print(detecter4diagonaleIndirectePlateau(p,1))
-print(detecter4diagonaleIndirectePlateau(p,0))
+resultat = getPionsGagnantsPlateau(p)
+for couleur in resultat:
+ print("Ligne horizontale : ",couleur[0])
+ print("Ligne vertical : ", couleur[1])
+ print("Ligne diagonal direct : ", couleur[2])
+ print("Ligne diagonal indirect: ", couleur[3])
+ print()
+
+print(isRempliPlateau(p))
