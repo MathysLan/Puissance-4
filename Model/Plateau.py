@@ -47,3 +47,34 @@ def construirePlateau() -> list:
             plateau[i].append(None)
     return plateau
 
+def placerPionPlateau(plateau: list,pion: dict, nbCol : int) -> int:
+    """
+    Place le pion passé en paramètre dans le tableau dans une colonne passé en paramètre
+
+    :param plateau: Paramètre correspondant à un tableau 2D
+    :param pion: Paramètre correspondant au pion que l'on veut placer dans le tableau
+    :param nbCol: Paramètre correspondant à la colonne ou l'on veut placer le pion dans le tableau
+    :return: La ligne ou se trouve le pion après qu'il a été placé
+    :raise TypeError: Si le paramètre n’est pas une liste
+    :raise TypeError: Si le paramètre n’est pas un dictionnaire
+    :raise TypeError: Si le paramètre n’est pas un entier
+    :raise ValueError: Si le paramètre n’est compris entre 0 et la constante représentant le nombre de colonnes
+    """
+    if not type_plateau(plateau) :
+        raise TypeError("placerPionPlateau: Le premier paramètre ne correspond pas à un plateau.")
+    elif not(type_pion(pion)):
+        raise TypeError("setIdPion : Le premier paramètre n’est pas un pion")
+    elif type(nbCol) != int:
+        raise TypeError("placerPionPlateau : Le troisième paramètre n’est pas un entier")
+    elif nbCol < 0 or nbCol >= const.NB_COLUMNS:
+        raise ValueError(f" La valeur de la colonne {nbCol} n’est pas correcte")
+    numeroLignePion = -1
+    if plateau[const.NB_LINES-1][nbCol] == None:
+        plateau[const.NB_LINES-1][nbCol] = pion
+        numeroLignePion = const.NB_LINES -1
+    else:
+        numeroLignePion = const.NB_LINES -2
+        while numeroLignePion >= 0 and plateau[numeroLignePion][nbCol] != None:
+            numeroLignePion -= 1
+        plateau[numeroLignePion][nbCol] = pion
+    return numeroLignePion
