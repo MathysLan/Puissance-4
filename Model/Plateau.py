@@ -34,4 +34,16 @@ def type_plateau(plateau: list) -> bool:
         return False
     return True
 
+def construirePlateau() -> list:
+    """
+    Fonction permettant de créer un tableau 2D avec un nombre de ligne et un nombre de colonnes constant
+
+    :return:  Plateau qui correspond à un tableau 2D
+    """
+    plateau = []
+    for i in range(const.NB_LINES):
+        plateau.append([])
+        for j in range(const.NB_COLUMNS):
+            plateau[i].append(None)
+    return plateau
 
