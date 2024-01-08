@@ -78,3 +78,40 @@ def placerPionPlateau(plateau: list,pion: dict, nbCol : int) -> int:
             numeroLignePion -= 1
         plateau[numeroLignePion][nbCol] = pion
     return numeroLignePion
+
+def toStringPlateau(plateau : list) -> str:
+    """
+    Affiche au niveau terminal avec des couleurs le tableau passé en paramètre pour faciliter le débugague
+
+    :param plateau: Paramètre qui doit être afficher au niveau terminal
+    :return: Retourne la chaine de caractère représentant le tableau passé en paramètre
+    """
+    res = ''
+    for i in range(const.NB_LINES):
+        for j in range(const.NB_COLUMNS):
+            if plateau[i][j]!= None:
+                if plateau[i][j][const.COULEUR] == const.ROUGE:
+                    res += '\x1B[41m \x1B[0m'
+                else:
+                    res += '\x1B[43m \x1B[0m'
+            else:
+                res += ' '
+            res += '|'
+        res += '\n'
+
+    res += '-' * (const.NB_COLUMNS *2+1)
+    res += '\n'
+    for j in range(const.NB_COLUMNS):
+        res += ' '
+        res += str(j)
+    return res
+
+from Model.Constantes import *
+from Model.Plateau import *
+from Model.Pion import *
+from random import randint, choice
+p = construirePlateau()
+for _ in range(20):
+ placerPionPlateau(p, construirePion(choice(const.COULEURS)),
+ randint(0, const.NB_COLUMNS - 1))
+print(toStringPlateau(p))
