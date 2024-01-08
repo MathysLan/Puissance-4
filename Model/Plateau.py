@@ -303,11 +303,10 @@ def getPionsGagnantsPlateau(plateau: list) -> list:
         raise TypeError("getPionsGagnantsPlateau : Le paramètre n’est pas un plateau ")
     listeSerie4PionsAlignes = []
     for couleur in range(len(const.COULEURS)):
-        listeSerie4PionsAlignes.append([])
-        listeSerie4PionsAlignes[couleur].append(detecter4horizontalPlateau(plateau, couleur))
-        listeSerie4PionsAlignes[couleur].append(detecter4verticalPlateau(plateau, couleur))
-        listeSerie4PionsAlignes[couleur].append(detecter4diagonaleDirectePlateau(plateau,couleur))
-        listeSerie4PionsAlignes[couleur].append(detecter4diagonaleIndirectePlateau(plateau, couleur))
+        listeSerie4PionsAlignes.append(detecter4horizontalPlateau(plateau, couleur))
+        listeSerie4PionsAlignes.append(detecter4verticalPlateau(plateau, couleur))
+        listeSerie4PionsAlignes.append(detecter4diagonaleDirectePlateau(plateau,couleur))
+        listeSerie4PionsAlignes.append(detecter4diagonaleIndirectePlateau(plateau, couleur))
     return listeSerie4PionsAlignes
 
 def isRempliPlateau(plateau : list) -> bool:

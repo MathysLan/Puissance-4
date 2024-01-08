@@ -85,7 +85,7 @@ def getIdPion(pion : dict) -> int:
     :return: Retourne l'ID
     :raise TypeError: Si le paramètre n’est pas un dictionnaire
     """
-    if not(type_pion(pion)):
+    if not (type_pion(pion)):
         raise TypeError("getIdPion : Le paramètre n’est pas un pion")
     return pion[const.ID]
 
