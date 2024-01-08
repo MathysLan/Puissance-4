@@ -75,6 +75,20 @@ def getIdPion(pion : dict) -> int:
     :return:
     """
     if not(type_pion(pion)):
-        raise TypeError(" getIdPion : Le paramètre n’est pas un pion")
+        raise TypeError("getIdPion : Le paramètre n’est pas un pion")
     return pion[const.ID]
+
+def sedIdPion(pion: dict, id : int) -> None:
+    """
+
+    :param pion:
+    :param id:
+    :return:
+    """
+    if not(type_pion(pion)):
+        raise TypeError("setIdPion : Le premier paramètre n’est pas un pion")
+    elif type(id) != int:
+        raise TypeError("setIdPion : Le second paramètre n’est pas un entier")
+    pion[const.ID] = id
+    return None
 
