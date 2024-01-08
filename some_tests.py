@@ -20,10 +20,11 @@ from Model.Pion import *
 from random import randint, choice
 p = construirePlateau()
 for _ in range(20):
- placerPionPlateau(p, construirePion(choice(const.COULEURS)),
+ placerPionPlateau(p, construirePion(1),
  randint(0, const.NB_COLUMNS - 1))
 print(toStringPlateau(p))
 print(detecter4horizontalPlateau(p,1))
 print(detecter4verticalPlateau(p,1))
 print(detecter4diagonaleDirectePlateau(p,1))
 print(detecter4diagonaleIndirectePlateau(p,1))
+print(detecter4diagonaleIndirectePlateau(p,0))

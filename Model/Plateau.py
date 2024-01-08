@@ -180,7 +180,7 @@ def detecter4verticalPlateau(plateau: list, couleur: int) -> list:
 
 def detecter4diagonaleDirectePlateau(plateau : list, couleur : int) -> list:
     """
-    Fonction permettant de savoir s'il y a 4 pions de même couleur à la suite diagonalement direct
+    Fonction permettant de savoir s'il y a 4 pions de même couleur à la suite diagonalement indirect
 
     :param plateau: Paramètre où l'on va chercher si 4 pions sont alignés
     :param couleur: Paramètre correspondant à la couleur du pion que l'on cherche
@@ -197,9 +197,9 @@ def detecter4diagonaleDirectePlateau(plateau : list, couleur : int) -> list:
         raise ValueError(f"détecter4verticalPlateau : La valeur de la couleur {couleur}n’est pas correcte")
     listePiontDiagonal = []
     # POur chaque ligne -3 car il ne peut pas avoir de diagonale qui part de 3 ligne en arrière
-    for ligne in range(const.NB_LINES - 3):
+    for ligne in range(const.NB_LINES-3):
         # de même pour les colonnes
-        for colonnes in range(const.NB_COLUMNS -3):
+        for colonnes in range(const.NB_COLUMNS-3):
             # Si l'element est bien de la bonne couleur alors on teste les 4 prochains piont en diagonale
             if plateau[ligne][colonnes] != None and plateau[ligne][colonnes][const.COULEUR] == couleur:
                 i = 0
@@ -211,10 +211,9 @@ def detecter4diagonaleDirectePlateau(plateau : list, couleur : int) -> list:
                         drapeau = False
                     i +=1
                 # Si le drapeau est égal à True alors c'est qu'il n'y a pas de problème donc ajoute les pions
-                if drapeau == True:
+                if drapeau == True :
                     listePiontDiagonal += [plateau[ligne][colonnes], plateau[ligne+1][colonnes+1],plateau[ligne+2][colonnes+2 ], plateau[ligne+3][colonnes+3]]
     return listePiontDiagonal
-
 def detecter4diagonaleIndirectePlateau(plateau: list, couleur: int) -> list:
     """
     Fonction permettant de savoir s'il y a 4 pions de même couleur à la suite diagonalement indirect
