@@ -2,6 +2,7 @@
 
 from Model.Constantes import *
 
+
 #
 # Ce fichier implémente les données/fonctions concernant le pion
 # dans le jeu du Puissance 4
@@ -26,3 +27,18 @@ def type_pion(pion: dict) -> bool:
         and (pion[const.ID] is None or type(pion[const.ID]) == int)
 
 
+
+def construirePion(couleur: int) -> dict:
+    """
+
+    :param couleur:
+    :return:
+    """
+    if type(couleur) != int:
+        raise TypeError("construirePion : Le paramètre n’est pas de type entier")
+    elif couleur not in const.COULEURS:
+        raise ValueError(f"« construirePion : la couleur {couleur} n’est pas correcte ")
+
+    return {const.COULEUR : couleur, const.ID : None }
+
+def getCouleurPion(pion: dict)
