@@ -24,3 +24,4 @@ for _ in range(20):
  randint(0, const.NB_COLUMNS - 1))
 print(toStringPlateau(p))
 print(detecter4horizontalPlateau(p,1))
+print(detecter4verticalPlateau(p,1))

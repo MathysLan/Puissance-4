@@ -108,7 +108,7 @@ def toStringPlateau(plateau : list) -> str:
 
 def detecter4horizontalPlateau(plateau: list, couleur: int) -> list:
     """
-    Fonction permettant de savoir s'il y a 4 pions de même couleur à la suite
+    Fonction permettant de savoir s'il y a 4 pions de même couleur à la suite horizontalement
 
     :param plateau: Paramètre où l'on va chercher si 4 pions sont alignés
     :param couleur: Paramètre correspondant à la couleur du pion que l'on cherche
@@ -141,3 +141,40 @@ def detecter4horizontalPlateau(plateau: list, couleur: int) -> list:
                 listePionsHorizontal += [plateau[ligne][colonne-3], plateau[ligne][colonne-2],plateau[ligne][colonne-1], plateau[ligne][colonne]]
             colonne +=1
     return listePionsHorizontal
+
+def detecter4verticalPlateau(plateau: list, couleur: int) -> list:
+    """
+    Fonction permettant de savoir s'il y a 4 pions de même couleur à la suite verticalement
+
+    :param plateau: Paramètre où l'on va chercher si 4 pions sont alignés
+    :param couleur: Paramètre correspondant à la couleur du pion que l'on cherche
+    :return: Renvoie la liste des pions qui sont 4 à la suite en fonction de la couleur passé en paramètre
+    :raise TypeError: Si le paramètre n’est pas une liste
+    :raise TypeError: Si le paramètre n’est pas un entier
+    :raise ValueError: Si le paramètre n'est pas compris dans les couleurs constantes
+    """
+    if not(type_plateau(plateau)):
+        raise TypeError("Le premier paramètre ne correspond pas à un plateau")
+    if type(couleur) != int:
+        raise TypeError("detecter4horizontalPlateau : le second paramètre n’est pas un entier")
+    if couleur not in const.COULEURS:
+        raise ValueError(f"détecter4horizontalPlateau : La valeur de la couleur {couleur}n’est pas correcte")
+    listePionsVertical = []
+    # Pour chaque colonne
+    for colonne in range(const.NB_LINES):
+        ligne = 0
+        compteurPions = 0
+        # Tant qu'on arrive pas à la fin des ligne
+        while ligne < const.NB_LINES:
+            # Si l'élement n'est pas un pion ou que le pion n'est pas de la bonne couleur compteur à 0
+            if plateau[ligne][colonne] == None or plateau[ligne][colonne][const.COULEUR] != couleur:
+                compteurPions =0
+            # Sinon si le pion est de la bonne couleur compteur + 1
+            elif plateau[ligne][colonne][const.COULEUR] == couleur:
+                compteurPions += 1
+            # Si le compteut est égal à 4 c'est qu'on a bien les 4 pions donc on les prend en repartant en arrière
+            if compteurPions == 4:
+                listePionsVertical += [plateau[ligne-3][colonne], plateau[ligne-2][colonne],plateau[ligne-1][colonne ], plateau[ligne][colonne]]
+            ligne +=1
+    return listePionsVertical
+
