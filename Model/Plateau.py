@@ -106,4 +106,22 @@ def toStringPlateau(plateau : list) -> str:
         res += str(j)
     return res
 
+def detecter4horizontalPlateau(plateau: list, couleur: int) -> list:
+    """
 
+    :param plateau:
+    :param couleur:
+    :return:
+    """
+    if not(type_plateau(plateau)):
+        raise TypeError("Le premier paramètre ne correspond pas à un plateau")
+    if type(couleur) != int:
+        raise TypeError("detecter4horizontalPlateau : le second paramètre n’est pas un entier")
+    if couleur not in const.COULEURS:
+        raise ValueError(f"détecter4horizontalPlateau : La valeur de la couleur {couleur}n’est pas correcte")
+    for ligne in range(const.NB_LINES):
+        colonne = 0
+        drapeau = False
+        while drapeau == False and colonne <= const.NB_COLUMNS:
+            
+    return
