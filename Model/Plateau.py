@@ -251,44 +251,41 @@ def detecter4diagonaleIndirectePlateau(plateau: list, couleur: int) -> list:
     if couleur not in const.COULEURS:
         raise ValueError("detecter4diagonaleDirectePlateau : La valeur de la couleur {couleur} n'est pas correcte.")
     listePion = []
-    for colonne in range(const.NB_COLUMNS - 3):
+
+    # Diagonale descendante (de gauche à droite)
+    for colonne in range(3, const.NB_COLUMNS):
         i = 0
-        # Nouvelle diagonale : réinitialisation du compteur de pions alignés
         nbPionsAlignes = 0
+
+        while i < (const.NB_LINES) and (colonne - i) >= 0:
+            if plateau[i][colonne - i] == None or plateau[i][colonne - i][const.COULEUR] != couleur:
+                nbPionsAlignes = 0
+            elif plateau[i][colonne - i][const.COULEUR] == couleur:
+                nbPionsAlignes += 1
+
+            if nbPionsAlignes == 4:
+                listePion += [plateau[i - 3][colonne - (i - 3)], plateau[i - 2][colonne - (i - 2)],
+                              plateau[i - 1][colonne - (i - 1)], plateau[i][colonne - i]]
+                nbPionsAlignes = 0
+            i += 1
+
+    # Diagonale montante (de droite à gauche)
+    for colonne in range(const.NB_COLUMNS - 4):
+        i = 0
+        nbPionsAlignes = 0
+
         while i < (const.NB_LINES) and (colonne + i) < const.NB_COLUMNS:
-            # Si on n'est pas sur un pion, ou que ce n'est pas un pion de la bonne couleur
             if plateau[i][colonne + i] == None or plateau[i][colonne + i][const.COULEUR] != couleur:
-                # Remise du compteur de pions alignés à 0
                 nbPionsAlignes = 0
-            # Sinon, c'est un pion de la bonne couleur
             elif plateau[i][colonne + i][const.COULEUR] == couleur:
-                # On incrémente le compteur de pions alignés de 1
                 nbPionsAlignes += 1
-            # Si on a 4 pions alignés
+
             if nbPionsAlignes == 4:
-                # On ajoute ces 4 pions à la liste résultat, et on réinitialise le compteur
-                listePion += [plateau[i-3][colonne + (i-3)], plateau[i-2][colonne + (i-2)], plateau[i-1][colonne + (i-1)], plateau[i][colonne + i]]
+                listePion += [plateau[i - 3][colonne + (i - 3)], plateau[i - 2][colonne + (i - 2)],
+                              plateau[i - 1][colonne + (i - 1)], plateau[i][colonne + i]]
                 nbPionsAlignes = 0
             i += 1
-    for ligne in range(1, const.NB_LINES - 3):
-        i = 0
-        # Nouvelle diagonale : réinitialisation du compteur de pions alignés
-        nbPionsAlignes = 0
-        while i < (const.NB_COLUMNS) and (ligne + i) < const.NB_LINES:
-            # Si on n'est pas sur un pion, ou que ce n'est pas un pion de la bonne couleur
-            if plateau[ligne + i][i] == None or plateau[ligne + i][i][const.COULEUR] != couleur:
-                # Remise du compteur de pions alignés à 0
-                nbPionsAlignes = 0
-            # Sinon, c'est un pion de la bonne couleur
-            elif plateau[ligne + i][i][const.COULEUR] == couleur:
-                # On incrémente le compteur de pions alignés de 1
-                nbPionsAlignes += 1
-            # Si on a 4 pions alignés
-            if nbPionsAlignes == 4:
-                # On ajoute ces 4 pions à la liste résultat, et on réinitialise le compteur
-                listePion += [plateau[ligne + (i-3)][i-3], plateau[ligne + (i-2)][i-2], plateau[ligne + (i-1)][i-1], plateau[ligne + i][i]]
-                nbPionsAlignes = 0
-            i += 1
+
     return listePion
 def getPionsGagnantsPlateau(plateau: list) -> list:
     """
