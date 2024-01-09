@@ -269,24 +269,24 @@ def detecter4diagonaleIndirectePlateau(plateau: list, couleur: int) -> list:
             i += 1
 
     for ligne in range(1, const.NB_LINES - 3):
-        i = const.NB_COLUMNS -1
+        i = 0
         # Nouvelle diagonale : réinitialisation du compteur de pions alignés
         nbPionsAlignes = 0
-        while i >= (const.NB_COLUMNS) and (ligne + i) > const.NB_LINES:
-            print("HJEKDLM%S")
+        while 0 <= (const.NB_COLUMNS -1-i) and (ligne + i) < const.NB_LINES:
+
             # Si on n'est pas sur un pion, ou que ce n'est pas un pion de la bonne couleur
-            if plateau[(ligne - i) %const.NB_COLUMNS][i] == None or plateau[(ligne - i) %const.NB_COLUMNS][i][const.COULEUR] != couleur:
+            if plateau[ligne + i][const.NB_COLUMNS -1 -i] == None or plateau[ligne + i][const.NB_COLUMNS -1 -i][const.COULEUR] != couleur:
                 # Remise du compteur de pions alignés à 0
                 nbPionsAlignes = 0
             # Sinon, c'est un pion de la bonne couleur
 
-            elif plateau[(ligne - i) %const.NB_COLUMNS][i][const.COULEUR] == couleur:
+            else:
                 # On incrémente le compteur de pions alignés de 1
                 nbPionsAlignes += 1
             # Si on a 4 pions alignés
             if nbPionsAlignes == 4:
                 # On ajoute ces 4 pions à la liste résultat, et on réinitialise le compteur
-                listePion += [plateau[ligne + (i-3)][i-3], plateau[ligne + (i-2)][i-2], plateau[ligne + (i-1)][i-1], plateau[ligne + i][i]]
+                listePion += [plateau[ligne + (i-3)][const.NB_COLUMNS -1 -(i-3)], plateau[ligne + (i-2)][const.NB_COLUMNS -1 -(i-2)], plateau[ligne + (i-1)][const.NB_COLUMNS -1 -(i-1)], plateau[ligne + i][const.NB_COLUMNS -1 -i]]
                 nbPionsAlignes = 0
 
 
@@ -303,10 +303,10 @@ def getPionsGagnantsPlateau(plateau: list) -> list:
         raise TypeError("getPionsGagnantsPlateau : Le paramètre n’est pas un plateau ")
     listeSerie4PionsAlignes = []
     for couleur in range(len(const.COULEURS)):
-        listeSerie4PionsAlignes.append(detecter4horizontalPlateau(plateau, couleur))
-        listeSerie4PionsAlignes.append(detecter4verticalPlateau(plateau, couleur))
-        listeSerie4PionsAlignes.append(detecter4diagonaleDirectePlateau(plateau,couleur))
-        listeSerie4PionsAlignes.append(detecter4diagonaleIndirectePlateau(plateau, couleur))
+        listeSerie4PionsAlignes += detecter4horizontalPlateau(plateau, couleur)
+        listeSerie4PionsAlignes += detecter4verticalPlateau(plateau, couleur)
+        listeSerie4PionsAlignes += detecter4diagonaleDirectePlateau(plateau,couleur)
+        listeSerie4PionsAlignes += detecter4diagonaleIndirectePlateau(plateau, couleur)
     return listeSerie4PionsAlignes
 
 def isRempliPlateau(plateau : list) -> bool:
