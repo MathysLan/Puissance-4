@@ -331,12 +331,17 @@ def isRempliPlateau(plateau : list) -> bool:
 
 def placerPionLignePlateau(plateau: list, pion: dict, numLigne: int, left: bool)-> tuple:
     """
-
-    :param plateau:
-    :param pion:
-    :param numLigne:
-    :param left:
-    :return:
+    Place un pion sur le plateau dans une ligne spécifiée.
+    :param plateau: Le plateau sur lequel placer le pion.
+    :param pion: Le pion à placer.
+    :param numLigne: Le numéro de la ligne où placer le pion.
+    :param left: Un booléen indiquant si le placement doit être effectué à gauche ou à droite de la ligne.
+    :return: Un tuple contenant le plateau mis à jour et les coordonnées du pion placé.
+    :raise TypeError: Si le premier paramètre n'est pas un plateau.
+    :raise TypeError: Si le second paramètre n'est pas un pion.
+    :raise TypeError: Si le troisième paramètre n'est pas un entier.
+    :raise ValueError: Si le troisième paramètre ne désigne pas une ligne valide.
+    :raise TypeError: Si le quatrième paramètre n'est pas un booléen.
     """
     if not (type_plateau(plateau)):
         raise TypeError("placerPionLignePlateau : Le premier paramètre n’est pas un plateau")
