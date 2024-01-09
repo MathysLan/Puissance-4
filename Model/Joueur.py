@@ -142,7 +142,7 @@ def _placerPionJoueur(joueur : dict) -> int:
 
     :param joueur: Paramètre qui représente le joueur
     :return: entier représentant la colonne où l'IA va jouer son piont
-    aise TypeError: Si le paramètre n’est pas un joueur
+    :raise TypeError: Si le paramètre n’est pas un joueur
     """
     if not (type_joueur(joueur)):
         raise TypeError(" setPlacerPionJoueur : le paramètre ne correspond pas à un joueur")
@@ -155,3 +155,19 @@ def _placerPionJoueur(joueur : dict) -> int:
             colonneAlea = randint(0, const.NB_COLUMNS -1)
     return colonneAlea
 
+def initialiserIAJoueur(joueur: dict, booleen : bool) ->None:
+    """
+    Fonction qui affecte la fonction _placerPionJoueur au joueur passé en paramètre
+
+    :param joueur:Paramètre qui représente le joueur
+    :param booleen: Paramètre permettant de savoir si le joueur joue en premier (True) ou en second (False)
+    :return: Rien
+    :raise TypeError: Si le paramètre n’est pas un joueur
+    :raise TypeError: Si le paramètre n’est pas un booléen
+    """
+    if not (type_joueur(joueur)):
+        raise TypeError("initialiserIAJoueur : Le premier paramètre n’est pas un joueur")
+    if type(booleen) != bool:
+        raise TypeError("initialiserIAJoueur : Le second paramètre n’est pas un booléen")
+    setPlacerPionJoueur(joueur, _placerPionJoueur)
+    return None
