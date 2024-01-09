@@ -25,4 +25,7 @@ for _ in range(20):
 print(toStringPlateau(p))
 print(getPionsGagnantsPlateau(p))
 print(isRempliPlateau(p))
+historigramme = {2:'______________J_J___RRJJ_J_RJJJ_J_RRJJJRRJ',4:'______________R__R_J_R__J_JRRR_JRJJRRJJJJJ'}
 print(encoderPlateau(p))
+print(isPatPlateau(p,historigramme))
+print(historigramme)

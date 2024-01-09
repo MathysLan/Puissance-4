@@ -422,3 +422,27 @@ def encoderPlateau(plateau: list)->str:
                 else:
                     plateauEncoder += 'J'
     return plateauEncoder
+
+def isPatPlateau(plateau: list, historigramme: dict) -> bool:
+    """
+    Vérifie si le plateau est dans une situation de pat (match nul) grâce au dictionnaire passé en paramètre
+    :param plateau: Le plateau à vérifier.
+    :param historigramme: L'histogramme des pions sur le plateau.
+    :return: True si le plateau est en pat, False sinon.
+    :raise TypeError: Si le premier paramètre n'est pas un plateau.
+    :raise TypeError: Si le second paramètre n'est pas un dictionnaire.
+    """
+    if not (type_plateau(plateau)):
+        raise TypeError("isPatPlateau : Le premier paramètre n’est pas un plateau")
+    if type(historigramme) != dict:
+        raise TypeError("isPatPlateau : Le second paramètre n’est pas un dictionnaire")
+    booleen = False
+    plateauEncoder = encoderPlateau(plateau)
+    if  plateauEncoder in historigramme:
+        for cle in historigramme.keys():
+            cle += 1
+            if cle == 5:
+                booleen = True
+    else:
+        historigramme[1] = plateauEncoder
+    return booleen
