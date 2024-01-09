@@ -328,3 +328,55 @@ def isRempliPlateau(plateau : list) -> bool:
             colonne += 1
         ligne += 1
     return drapeau
+
+def placerPionLignePlateau(plateau: list, pion: dict, numLigne: int, left: bool)-> tuple:
+    """
+
+    :param plateau:
+    :param pion:
+    :param numLigne:
+    :param left:
+    :return:
+    """
+    if not (type_plateau(plateau)):
+        raise TypeError("placerPionLignePlateau : Le premier paramètre n’est pas un plateau")
+    if not (type_pion(pion)):
+        raise TypeError("placerPionLignePlateau : Le second paramètre n’est pas un pion ")
+    if type(numLigne) != int:
+        raise TypeError("placerPionLignePlateau : le troisième paramètre n’est pas un entier ")
+    if numLigne < 0 or numLigne > (const.NB_LINES -1) :
+        raise ValueError(f"« placerPionLignePlateau : Le troisième paramètre {numLigne} ne désigne pas une ligne")
+    if type(left) != bool:
+        raise TypeError("placerPionLignePlateau : le quatrième paramètre n’est pas un booléen")
+    listePionsPousse = [pion]
+
+    if left :
+        colonne = 0
+        while colonne < const.NB_COLUMNS and plateau[numLigne][colonne] != None:
+            listePionsPousse.append(plateau[numLigne][colonne])
+            colonne += 1
+
+        if numLigne < (const.NB_LINES -1) and plateau[numLigne+1][colonne] == None:
+            res = const.NB_LINES -1
+            while plateau[res][colonne]:
+                res -= 1
+            plateau[res][colonne] = listePionsPousse[len(listePionsPousse)-1]
+            for j in range(0, colonne + 1):
+                plateau[numLigne][j] = listePionsPousse[j]
+        else:
+            if colonne == const.NB_COLUMNS:
+                colonne -= 1
+                res = const.NB_LINES
+            else:
+                res = None
+            for j in range(0,colonne+1):
+                plateau[numLigne][j] = listePionsPousse[j]
+
+    else:
+        colonne = const.NB_COLUMNS -1
+        while colonne > 0 and plateau[numLigne][colonne] != None:
+            listePionsPousse.append(plateau[numLigne][colonne])
+            colonne -= 1
+
+    print(listePionsPousse)
+    return (listePionsPousse,res)
