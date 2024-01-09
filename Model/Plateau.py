@@ -366,7 +366,7 @@ def placerPionLignePlateau(plateau: list, pion: dict, numLigne: int, left: bool)
             while plateau[res][colonne]:
                 res -= 1
             plateau[res][colonne] = listePionsPousse[len(listePionsPousse)-1]
-            for j in range(0, colonne + 1):
+            for j in range(0, colonne +1):
                 plateau[numLigne][j] = listePionsPousse[j]
         else:
             if colonne == const.NB_COLUMNS:
