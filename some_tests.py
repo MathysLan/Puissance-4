@@ -25,3 +25,4 @@ for _ in range(20):
 print(toStringPlateau(p))
 print(getPionsGagnantsPlateau(p))
 print(isRempliPlateau(p))
+print(encoderPlateau(p))

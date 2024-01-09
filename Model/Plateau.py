@@ -320,7 +320,7 @@ def isRempliPlateau(plateau : list) -> bool:
         raise TypeError("isRempliPlateau : Le paramètre n’est pas un plateau ")
     drapeau = True
     ligne = 0
-    while ligne < const.  aNB_LINES and drapeau ==  True:
+    while ligne < const.NB_LINES and drapeau ==  True:
         colonne = 0
         while colonne < const.NB_COLUMNS and drapeau ==  True:
             if plateau[ligne][colonne] is None:
@@ -401,3 +401,24 @@ def placerPionLignePlateau(plateau: list, pion: dict, numLigne: int, left: bool)
 
     print(listePionsPousse)
     return (listePionsPousse,res)
+
+def encoderPlateau(plateau: list)->str:
+    """
+    Encode le plateau sous forme de chaîne de caractères.
+    :param plateau: Le plateau à encoder.
+    :return: Une chaîne de caractères représentant le plateau.
+    :raise TypeError: Si le paramètre n'est pas un plateau.
+    """
+    if not (type_plateau(plateau)):
+        raise TypeError("encoderPlateau : le paramètre ne correspond pas à un plateau")
+    plateauEncoder = ''
+    for i in range(const.NB_LINES):
+        for j in range(const.NB_COLUMNS):
+            if plateau[i][j]== None:
+                plateauEncoder += '_'
+            else:
+                if plateau[i][j][const.COULEUR] == const.ROUGE:
+                    plateauEncoder += 'R'
+                else:
+                    plateauEncoder += 'J'
+    return plateauEncoder
