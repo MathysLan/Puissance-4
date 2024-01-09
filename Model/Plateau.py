@@ -320,7 +320,7 @@ def isRempliPlateau(plateau : list) -> bool:
         raise TypeError("isRempliPlateau : Le paramètre n’est pas un plateau ")
     drapeau = True
     ligne = 0
-    while ligne < const.NB_LINES and drapeau ==  True:
+    while ligne < const.  aNB_LINES and drapeau ==  True:
         colonne = 0
         while colonne < const.NB_COLUMNS and drapeau ==  True:
             if plateau[ligne][colonne] is None:
@@ -373,10 +373,26 @@ def placerPionLignePlateau(plateau: list, pion: dict, numLigne: int, left: bool)
                 plateau[numLigne][j] = listePionsPousse[j]
 
     else:
-        colonne = const.NB_COLUMNS -1
-        while colonne > 0 and plateau[numLigne][colonne] != None:
+        colonne = const.NB_COLUMNS - 1
+        while colonne >= 0 and plateau[numLigne][colonne] != None:
             listePionsPousse.append(plateau[numLigne][colonne])
             colonne -= 1
+
+        if numLigne < (const.NB_LINES - 1) and plateau[numLigne + 1][colonne] == None:
+            res = const.NB_LINES - 1
+            while plateau[res][colonne]:
+                res -= 1
+            plateau[res][colonne] = listePionsPousse[len(listePionsPousse) - 1]
+            for j in range(const.NB_COLUMNS - 1, colonne , -1):
+                plateau[numLigne][j] = listePionsPousse[const.NB_COLUMNS - 1 - j]
+        else:
+            if colonne == -1:
+                colonne += 1
+                res = const.NB_LINES
+            else:
+                res = None
+            for j in range(const.NB_COLUMNS - 1, colonne , -1):
+                plateau[numLigne][j] = listePionsPousse[const.NB_COLUMNS - 1 - j]
 
     print(listePionsPousse)
     return (listePionsPousse,res)
