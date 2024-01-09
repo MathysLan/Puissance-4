@@ -1,3 +1,5 @@
+from random import randint
+
 from Model.Constantes import *
 from Model.Pion import *
 from Model.Plateau import *
@@ -133,3 +135,23 @@ def setPlacerPionJoueur(joueur: dict, fn: callable) -> None:
         raise TypeError("setPlacerPionJoueur : le second paramètre n’est pas une fonction")
     joueur[const.PLACER_PION] = fn
     return None
+
+def _placerPionJoueur(joueur : dict) -> int:
+    """
+    Fonction qui choisit un nombre aléatoire entre 0 et NB_COLUMNS -1 en vérifiant que la colonne n'est pas pleine
+
+    :param joueur: Paramètre qui représente le joueur
+    :return: entier représentant la colonne où l'IA va jouer son piont
+    aise TypeError: Si le paramètre n’est pas un joueur
+    """
+    if not (type_joueur(joueur)):
+        raise TypeError(" setPlacerPionJoueur : le paramètre ne correspond pas à un joueur")
+    colonneAlea = randint(0, const.NB_COLUMNS -1)
+    drapeau = False
+    while drapeau == False :
+        if joueur[const.PLATEAU][0][colonneAlea] == None:
+            drapeau = True
+        else:
+            colonneAlea = randint(0, const.NB_COLUMNS -1)
+    return colonneAlea
+
