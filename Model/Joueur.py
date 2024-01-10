@@ -156,30 +156,8 @@ def _placerPionJoueur(joueur : dict) -> int:
                 colonneAlea = randint(0, const.NB_COLUMNS -1)
     else:
         colonneAlea = randint(-const.NB_LINES, const.NB_COLUMNS + const.NB_LINES -1)
-        drapeau = False
-        print(colonneAlea)
-        if colonneAlea > -1 and colonneAlea < - const.NB_LINES:
-            colonneAlea = -colonneAlea - 1
-            print("test1")
-        elif colonneAlea > 0 and colonneAlea < - const.NB_COLUMNS - 1:
-            colonneAlea = colonneAlea
-            print("test2")
-        elif colonneAlea >= const.NB_COLUMNS and colonneAlea <= const.NB_COLUMNS + const.NB_LINES - 1:
-            colonneAlea = colonneAlea - const.NB_COLUMNS
-            print("test3")
-        while drapeau == False:
-
-            if joueur[const.PLATEAU][0][colonneAlea] == None:
-                drapeau = True
-            else:
-                colonneAlea = randint(-const.NB_LINES, const.NB_COLUMNS + const.NB_LINES -1)
-                if colonneAlea > -1 and colonneAlea < - const.NB_LINES:
-                    colonneAlea = -colonneAlea - 1
-                elif colonneAlea > 0 and colonneAlea < - const.NB_COLUMNS - 1:
-                    colonneAlea = colonneAlea
-                elif colonneAlea >= const.NB_COLUMNS and colonneAlea <= const.NB_COLUMNS + const.NB_LINES - 1:
-                    colonneAlea = colonneAlea - const.NB_COLUMNS
-
+        while (0 <= colonneAlea and colonneAlea < const.NB_COLUMNS) and (joueur[const.PLATEAU][0][colonneAlea] != None):
+            colonneAlea = randint(-const.NB_LINES, const.NB_COLUMNS + const.NB_LINES - 1)
     return colonneAlea
 
 def initialiserIAJoueur(joueur: dict, booleen : bool) ->None:
