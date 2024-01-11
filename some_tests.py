@@ -1,6 +1,7 @@
 from Model.Constantes import *
 from Model.Plateau import *
 from Model.Pion import *
+from Model.IAJoueur import *
 
 p = construirePlateau()
 print(p)
@@ -29,3 +30,6 @@ historigramme = {2:'______________J_J___RRJJ_J_RJJJ_J_RRJJJRRJ',4:'_____________
 print(encoderPlateau(p))
 print(isPatPlateau(p,historigramme))
 print(historigramme)
+matrice = plateauMatrice(p)
+for ligne in matrice:
+ print(ligne)

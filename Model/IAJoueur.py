@@ -16,3 +16,18 @@ def setJeuAdversaireJoueur(joueur: dict,colonne: int) -> None:
         raise TypeError("setJeuAdversaireJoueur: le paramètre n'est pas un entier")
     joueur[const.JEU_ADVERSAIRE] = colonne
     return None
+
+def plateauMatrice(plateau: list) -> list:
+    matrice = []
+    for i in range(const.NB_LINES):
+        matrice.append([])
+        for j in range(const.NB_COLUMNS):
+            if plateau[i][j]== None:
+                matrice[i] += '_'
+            else:
+                if plateau[i][j][const.COULEUR] == const.ROUGE:
+                    matrice[i] += 'R'
+                else:
+                    matrice[i] += 'J'
+    return matrice
+
