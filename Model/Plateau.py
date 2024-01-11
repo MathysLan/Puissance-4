@@ -161,7 +161,7 @@ def detecter4verticalPlateau(plateau: list, couleur: int) -> list:
         raise ValueError(f"détecter4verticalPlateau : La valeur de la couleur {couleur}n’est pas correcte")
     listePionsVertical = []
     # Pour chaque colonne
-    for colonne in range(const.NB_LINES):
+    for colonne in range(const.NB_COLUMNS):
         ligne = 0
         compteurPions = 0
         # Tant qu'on arrive pas à la fin des ligne
