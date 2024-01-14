@@ -17,17 +17,61 @@ def setJeuAdversaireJoueur(joueur: dict,colonne: int) -> None:
     joueur[const.JEU_ADVERSAIRE] = colonne
     return None
 
-def plateauMatrice(plateau: list) -> list:
+
+def herisitqueMatrice(plateau: list) -> list:
+    """
+
+    """
     matrice = []
-    for i in range(const.NB_LINES):
+    for ligne in range(const.NB_LINES):
         matrice.append([])
-        for j in range(const.NB_COLUMNS):
-            if plateau[i][j]== None:
-                matrice[i] += '_'
-            else:
-                if plateau[i][j][const.COULEUR] == const.ROUGE:
-                    matrice[i] += 'R'
-                else:
-                    matrice[i] += 'J'
+        for colonne in range(const.NB_COLUMNS):
+            matrice[ligne].append(0)
+            matrice[ligne][colonne] += heristiqueMatriceHorizontal(plateau, ligne, colonne)
+            matrice[ligne][colonne] += heristiqueMatriceVertical(plateau, ligne, colonne)
     return matrice
 
+def heristiqueMatriceHorizontal(plateau: list, ligne: int, colonne: int) -> int:
+    """
+
+    """
+    compteur = 0
+    if colonne == 0 :
+        compteur = 1
+    elif colonne == const.NB_COLUMNS - 1:
+        compteur = 1
+    elif colonne == const.NB_COLUMNS// 2:
+
+        compteur = 4
+    elif const.NB_COLUMNS // 2 - 1  == colonne or colonne == const.NB_COLUMNS // 2 +1 :
+        compteur = 3
+    else:
+        compteur = 2
+    return compteur
+
+def heristiqueMatriceVertical(plateau: list, ligne: int, colonne: int)-> int:
+    """
+
+    """
+    if ligne == 0:
+        compteur = 1
+    elif ligne == const.NB_LINES - 1:
+        compteur = 1
+    elif ligne == const.NB_LINES // 2:
+
+        compteur = 4
+    elif const.NB_LINES // 2 - 1 == ligne or ligne == const.NB_LINES // 2 + 1:
+        compteur = 3
+    else:
+        compteur = 2
+    return compteur
+
+def heristiqueMatriceDiagonaleDirect(plateau: list, ligne: int, colonne: int)-> int:
+    """
+
+    """
+    compteur = 0
+    if (ligne == 0 and colonne == 0) or (ligne == const.NB_LINES -1 and colonne == const.NB_COLUMNS -1):
+        compteur 1
+
+    return compteur

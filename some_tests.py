@@ -30,6 +30,4 @@ historigramme = {2:'______________J_J___RRJJ_J_RJJJ_J_RRJJJRRJ',4:'_____________
 print(encoderPlateau(p))
 print(isPatPlateau(p,historigramme))
 print(historigramme)
-matrice = plateauMatrice(p)
-for ligne in matrice:
- print(ligne)
+print(herisitqueMatrice(p))
